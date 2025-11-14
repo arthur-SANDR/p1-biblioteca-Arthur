@@ -24,13 +24,21 @@ class CLI:
                 title = input("Título: ")
                 author = input("Autor: ")
                 isbn = input("ISBN: ")
-                year = input("Ano: ")
+                
+                year_input = input("Ano: ").strip()
                 try:
-                    quantity = int(input("Quantidade: "))
+                    year = int(year_input) if year_input else None
                 except ValueError:
-                    print("Quantidade inválida.")
-                    continue
-
+                    print("Ano inválido.")
+                    year = None
+                    
+                quantity_input = input("Quantidade: ").strip()
+                try:
+                    quantity = int(quantity_input) if quantity_input else 1
+                except ValueError:
+                    print("Quantidade inválida. Usando 1.")
+                    quantity = 1
+                    
                 self.library.add_book(title, author, isbn, year, quantity)
                 print("Livro cadastrado.")
             
